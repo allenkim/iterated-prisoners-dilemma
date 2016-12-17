@@ -20,7 +20,6 @@ public:
         else
             return cc;
     }
-private:
     ii cc = make_pair(3, 3);
     ii cd = make_pair(0, 5);
     ii dc = make_pair(5, 0);
@@ -29,14 +28,30 @@ private:
 
 class Player {
 public:
-    Player() : moves(0), fitness(0), history(vector<int>()) {}
+    Player() : moves(0), fitness(0), history(ALL_COOPERATE) {}
     Player(int moves) : moves(moves), fitness(0), history(ALL_COOPERATE) {}
 
     int make_move(Player other_player) {
-        return ((1 << other_player.history) & this.moves);
+        return ((1 << other_player.history) & this->moves);
     }
 
     int moves;
     int fitness;
     int history;
+};
+
+class PD {
+	public:
+		PD();
+		PD(Player _a, Player _b, PayoffMatrix _p) : a(_a), b(_b), pmat(_p) {}
+
+		ii simulate(){
+			int action_a = a.make_move(b);
+			int action_b = b.make_move(a);
+			return pmat.get_payoff(action_a,action_b);
+		}
+
+		PayoffMatrix pmat;
+		Player a, b;
+
 };

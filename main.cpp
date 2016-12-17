@@ -1,12 +1,18 @@
 #include <iostream>
+#include <utility>
 #include "pd.h"
 
 using namespace std;
 
-int main(){
-  cout << "Hello World" << endl;
-  PayoffMatrix m();
-  Player allen(2);
+typedef pair<int,int> ii;
 
-  return 0;
+int main(){
+	PayoffMatrix pmat();
+	Player allen(0);
+	Player porrith(0);
+	PD game(allen,porrith,pmat);
+	ii results = game.simulate();
+	cout << results.first << " " << results.second << endl;
+
+	return 0;
 }
