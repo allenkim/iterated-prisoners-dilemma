@@ -7,7 +7,7 @@ using namespace std;
 typedef pair<int,int> ii;
 
 int main(){
-	PayoffMatrix pmat();
+	PayoffMatrix pmat;
 	Player allen(0);
 	Player porrith(0);
 	PD game(allen,porrith,pmat);
