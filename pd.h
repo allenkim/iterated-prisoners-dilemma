@@ -51,6 +51,9 @@ class Player {
 //			std::cout << bs << std::endl;
 			return move;
 		}
+		bool operator<(const Player& rhs) const {
+			return this->fitness < rhs.fitness;
+		}
 };
 
 class PD {
