@@ -34,9 +34,8 @@ size_t eval_fitness(vector<Player> &population){
 }
 
 vector<Player*> selection(vector<Player> &population, size_t total_fitness){
-	// Selection
 	vector<Player*> surviving_pop;
-	const int SURVIVING_NUMBER = rand() % 37 + 30;
+	const int SURVIVING_NUMBER = rand() % (POP_SIZE/2 - POP_SIZE/5) + POP_SIZE/5;
 	vector<double> roulette_wheel;
 	roulette_wheel.push_back((double)population[0].fitness / total_fitness);
 	for (int i = 1; i < POP_SIZE; i++){
@@ -60,9 +59,6 @@ vector<Player*> selection(vector<Player> &population, size_t total_fitness){
 			}
 		}
 	}
-	//for (size_t i = 0; i < surviving_pop.size(); i++){
-	//	cout << surviving_pop[i]->fitness << endl;
-	//}
 	return surviving_pop;
 }
 
@@ -85,7 +81,7 @@ vector<Player> crossover(vector<Player*> &surviving_pop){
 int mutation(vector<Player> &population){
 	// 1 / MUTATE_CHANCE is probability
 	int mutate_count = 0;
-	size_t MUTATE_CHANCE = RAND_MAX - 1;
+	size_t MUTATE_CHANCE = 100;
 	for (int i = 0; i < POP_SIZE; i++){
 		if (rand() % MUTATE_CHANCE == 1){
 			mutate_count++;
@@ -101,7 +97,7 @@ vector<Player> next_gen(vector<Player> &population){
 	cout << total_fitness;
 	vector<Player*> selected = selection(population, total_fitness);
 	vector<Player> new_gen = crossover(selected);
-	cout << mutation(new_gen) << endl;
+	mutation(new_gen);
 	return new_gen;
 	
 }
@@ -134,10 +130,10 @@ int main(){
 	simulate(population, 100);
 
 	// Initialize population
-	vector<Player> ult_pop;
-	for (int i = 0; i < POP_SIZE; i++){
-		ult_pop.push_back(Player(0b1010101010101010));
-	}
+//	vector<Player> ult_pop;
+//	for (int i = 0; i < POP_SIZE; i++){
+//		ult_pop.push_back(Player(0b1010101010101010));
+//	}
 
 	//simulate(ult_pop, 100);
 
